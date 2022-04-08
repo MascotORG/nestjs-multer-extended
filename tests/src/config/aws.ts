@@ -1,4 +1,4 @@
-import { MulterExtendedS3Options } from '../../../lib/interfaces';
+import { MulterExtendedS3Options } from '../../../lib';
 import {
   IMAGE_UPLOAD_MODULE_BASE_PATH,
   USER_PROFILE_IMAGE_UPLOAD_MODULE_BASE_PATH,

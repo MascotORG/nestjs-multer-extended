@@ -1,5 +1,5 @@
 module.exports = {
-  setupFilesAfterEnv: ['jest-extended'],
+  setupFilesAfterEnv: ['jest-extended/all'],
   moduleFileExtensions: ['js', 'json', 'ts'],
   rootDir: '.',
   verbose: true,

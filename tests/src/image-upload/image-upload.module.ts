@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ImageUploadController } from './image-upload.controller';
-import { MulterExtendedModule } from '../../../lib/multer-extended.module';
+import { MulterExtendedModule } from '../../../lib';
 import { ConfigService } from 'nestjs-config';
 
 @Module({

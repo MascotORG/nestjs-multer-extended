@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import { AppModule } from './app.module';
-import { MulterExceptions } from '../../lib/multer-sharp/enums';
+import { MulterExceptions } from '../../lib/multer-sharp';
 import { uid } from '../fixtures/uid';
 import {
   IMAGE_UPLOAD_MODULE_BASE_PATH,
@@ -88,7 +88,7 @@ describe('AppModule', () => {
 
       expect(res.status).toEqual(413);
       expect(res.body.message).toEqual(MulterExceptions.LIMIT_FILE_SIZE);
-    });
+    }, 10000);
 
     it(`should upload an image when the size limit option sets higher than the file size`, async () => {
       const res = await request(app.getHttpServer())
@@ -98,7 +98,7 @@ describe('AppModule', () => {
 
       expect(res.status).toEqual(201);
       expect(res.body.key).toEqual(`${basePath}/cat.jpg`);
-    });
+    }, 10000);
   });
 
   describe('UserProfileImageUploadController /POST', () => {

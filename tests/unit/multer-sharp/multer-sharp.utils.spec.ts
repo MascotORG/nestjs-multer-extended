@@ -7,10 +7,10 @@ import {
   getSharpOptionProps,
   getSharpOptions,
   transformException,
-} from '../../../lib/multer-sharp/multer-sharp.utils';
+} from '../../../lib/multer-sharp';
 import { S3StorageOptions } from '../../../lib/multer-sharp/interfaces/s3-storage.interface';
 import { SharpOptions } from '../../../lib/multer-sharp/interfaces/sharp-options.interface';
-import { MulterExceptions } from '../../../lib/multer-sharp/enums';
+import { MulterExceptions } from '../../../lib/multer-sharp';
 
 describe('Shared Multer Sharp Utils', () => {
   describe('transformException', () => {

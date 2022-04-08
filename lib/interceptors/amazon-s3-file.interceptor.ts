@@ -23,8 +23,8 @@ export function AmazonS3FileInterceptor(
 ): Type<NestInterceptor> {
   class MixinInterceptor implements NestInterceptor {
     protected multer: MulterInstance;
-    private localOptions: MulterExtendedOptions;
-    private options: MulterModuleOptions;
+    private readonly localOptions: MulterExtendedOptions;
+    private readonly options: MulterModuleOptions;
 
     constructor(
       @Optional()
@@ -47,7 +47,7 @@ export function AmazonS3FileInterceptor(
         this.multer.storage = this.pickStorageOptions();
       }
 
-      await new Promise((resolve, reject) =>
+      await new Promise<void>((resolve, reject) =>
         this.multer.single(fieldName)(ctx.getRequest(), ctx.getResponse(), (err: any) => {
           if (err) {
             const error = transformException(err);

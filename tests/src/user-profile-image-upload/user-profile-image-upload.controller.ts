@@ -1,5 +1,5 @@
 import { Controller, Post, UseInterceptors, UploadedFile } from '@nestjs/common';
-import { AmazonS3FileInterceptor } from '../../../lib/interceptors';
+import { AmazonS3FileInterceptor } from '../../../lib';
 import { uid } from '../../fixtures/uid';
 
 @Controller('user-profile-image-upload')
