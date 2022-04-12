@@ -1,10 +1,9 @@
 {
-  "name": "nestjs-multer-extended",
-  "version": "1.4.2",
+  "name": "@mascot/nestjs-multer-extended",
+  "version": "2.0.0",
   "description": "Extended MulterModule for NestJS",
-  "author": "Minsung Kim <jeffminsungkim@gmail.com>",
+  "author": "",
   "license": "MIT",
-  "url": "https://github.com/jeffminsungkim/nestjs-multer-extended#readme",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -26,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jeffminsungkim/nestjs-multer-extended"
+    "url": "https://github.com/MascotORG/nestjs-multer-extended"
   },
   "keywords": [
     "nestjs",
@@ -60,6 +59,7 @@
     "@nestjs/core": "^8.4.4",
     "@nestjs/platform-express": "^8.4.4",
     "@nestjs/testing": "^8.4.4",
+    "@types/aws-lambda": "^8.10.93",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/jest-when": "^3.5.0",
