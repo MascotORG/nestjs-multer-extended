@@ -1,4 +1,5 @@
 import { ResizeOptions, Sharp } from 'sharp';
+import { Formatting } from '../../interfaces';
 
 type SharpOption<T = string> = T;
 
@@ -19,4 +20,6 @@ export interface SharpOptions {
   resize?: ResizeOption;
   resizeMultiple?: ResizeOption;
   ignoreAspectRatio?: boolean;
+  format?: Formatting;
+  quality?: number;
 }

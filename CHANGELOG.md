@@ -1,3 +1,5 @@
+## [1.4.2](https://github.com/jeffminsungkim/nestjs-multer-extended/compare/2.0.0...2.0.1) (2022-04-25)
+## [1.4.2](https://github.com/jeffminsungkim/nestjs-multer-extended/compare/1.4.2...2.0.0) (2022-04-12)
 ## [1.4.2](https://github.com/jeffminsungkim/nestjs-multer-extended/compare/1.4.1...1.4.2) (2021-05-03)
 
 

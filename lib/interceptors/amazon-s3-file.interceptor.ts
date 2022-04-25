@@ -71,6 +71,7 @@ export function AmazonS3FileInterceptor(
             resize: [this.localOptions[extendedOptionProperty], { suffix: 'original' }],
             ignoreAspectRatio: true,
             dynamicPath: this.localOptions.dynamicPath,
+            format: { format: this.localOptions.format, quality: this.localOptions.quality },
           };
           return AmazonS3Storage(storageOptions);
         case ExtendedOptions.RESIZE_IMAGE:
@@ -78,6 +79,7 @@ export function AmazonS3FileInterceptor(
             ...this.options.storage.storageOpts,
             resize: this.localOptions[extendedOptionProperty],
             dynamicPath: this.localOptions.dynamicPath,
+            format: { format: this.localOptions.format, quality: this.localOptions.quality },
           };
           return AmazonS3Storage(storageOptions);
         case ExtendedOptions.RESIZE_IMAGE_MULTIPLE_SIZES:
@@ -86,6 +88,7 @@ export function AmazonS3FileInterceptor(
             resizeMultiple: this.localOptions[extendedOptionProperty],
             ignoreAspectRatio: true,
             dynamicPath: this.localOptions.dynamicPath,
+            format: { format: this.localOptions.format, quality: this.localOptions.quality },
           };
           return AmazonS3Storage(storageOptions);
         default:

@@ -173,9 +173,10 @@ describe('AppModule', () => {
       expect(original.key).toEqual(`${dynamicPath}/test/crying.jpg-original`);
     });
 
-    it(`should upload resized image`, async () => {
+    it(`should upload resized image %d`, async () => {
+
       const res = await request(app.getHttpServer())
-        .post(`/user-profile-image-upload/resized`)
+        .post('/user-profile-image-upload/resized/jpg')
         .set('Content-Type', 'multipart/form-data')
         .attach('file', path.resolve(__dirname, 'data/go.jpeg'));
 
@@ -183,6 +184,23 @@ describe('AppModule', () => {
       expect(res.body.width).toEqual(500);
       expect(res.body.height).toEqual(450);
       expect(res.body.key).toEqual(`${basePath}/go.jpeg`);
+      expect(res.body.ContentType).toEqual(`jpg`);
+      expect(res.body.mimetype).toEqual(`image/jpg`);
+    });
+
+    it(`should upload resized image %d`, async () => {
+
+      const res = await request(app.getHttpServer())
+          .post('/user-profile-image-upload/resized/webp')
+          .set('Content-Type', 'multipart/form-data')
+          .attach('file', path.resolve(__dirname, 'data/go.jpeg'));
+
+      expect(res.status).toEqual(201);
+      expect(res.body.width).toEqual(500);
+      expect(res.body.height).toEqual(450);
+      expect(res.body.key).toEqual(`${basePath}/go.jpeg`);
+      expect(res.body.ContentType).toEqual(`webp`);
+      expect(res.body.mimetype).toEqual(`image/webp`);
     });
 
     it(`should upload images in different sizes`, async () => {

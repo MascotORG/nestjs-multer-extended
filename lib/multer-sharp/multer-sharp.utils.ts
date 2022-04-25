@@ -3,6 +3,7 @@ import sharp, { Sharp } from 'sharp';
 import { SharpOptions, ResizeOption } from './interfaces/sharp-options.interface';
 import { S3StorageOptions } from './interfaces/s3-storage.interface';
 import { ExtendedOptions, MulterExceptions } from './enums';
+import { Format } from '../interfaces';
 
 export const transformException = (error: Error | undefined) => {
   if (!error || error instanceof HttpException) {
@@ -25,7 +26,6 @@ export const transformException = (error: Error | undefined) => {
 
 export const transformImage = (options: SharpOptions, size: ResizeOption): Sharp => {
   let imageStream = sharp({ failOnError: false });
-
   for (const [key, value] of Object.entries(options)) {
     if (value) {
       imageStream = resolveImageStream(key, value, size, imageStream);
@@ -35,12 +35,12 @@ export const transformImage = (options: SharpOptions, size: ResizeOption): Sharp
 };
 
 export const getSharpOptionProps = (storageOpts: S3StorageOptions) => {
-  const prop = Object.keys(storageOpts).filter(p => p === 'resize' || p === 'resizeMultiple')[0];
+  const prop = Object.keys(storageOpts).filter((p) => p === 'resize' || p === 'resizeMultiple')[0];
   return storageOpts[prop];
 };
 
 export const isOriginalSuffix = (suffix: string) => suffix === 'original';
-const isObject = obj => typeof obj === 'object' && obj !== null;
+const isObject = (obj) => typeof obj === 'object' && obj !== null;
 
 const resolveImageStream = (key: string, value, size, imageStream: Sharp) => {
   switch (key) {
@@ -48,6 +48,26 @@ const resolveImageStream = (key: string, value, size, imageStream: Sharp) => {
     case ExtendedOptions.RESIZE_IMAGE_MULTIPLE_SIZES:
       if (isObject(size)) {
         imageStream = imageStream.resize(size.width, size.height, size.options);
+      }
+      break;
+    case ExtendedOptions.RESIZE_FORMAT:
+      switch (value.format) {
+        case Format.JPEG:
+        case Format.JPG:
+          imageStream = imageStream.jpeg({ quality: value.quality });
+          break;
+
+        case Format.PNG:
+          imageStream = imageStream.png({ quality: value.quality });
+          break;
+
+        case Format.GIF:
+          imageStream = imageStream.gif();
+          break;
+
+        case Format.WEBP:
+          imageStream = imageStream.webp({ quality: value.quality });
+          break;
       }
       break;
   }
@@ -60,5 +80,7 @@ export const getSharpOptions = (options: SharpOptions): SharpOptions => {
     resize: options.resize,
     resizeMultiple: options.resizeMultiple,
     ignoreAspectRatio: options.ignoreAspectRatio,
+    format: options.format,
+    quality: options.quality,
   };
 };

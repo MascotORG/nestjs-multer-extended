@@ -5,15 +5,15 @@ import { ManagedUpload } from 'aws-sdk/lib/s3/managed_upload';
 import { isFunction, isString } from '@nestjs/common/utils/shared.utils';
 import { Request } from 'express';
 import { from, Observable } from 'rxjs';
-import { map, mergeMap, toArray, first } from 'rxjs/operators';
-import { lookup, extension } from 'mime-types';
-import { S3StorageOptions, S3Storage } from './interfaces/s3-storage.interface';
-import { SharpOptions, Size, ExtendSize } from './interfaces/sharp-options.interface';
+import { first, map, mergeMap, toArray } from 'rxjs/operators';
+import { extension, lookup } from 'mime-types';
+import { S3Storage, S3StorageOptions } from './interfaces/s3-storage.interface';
+import { ExtendSize, SharpOptions, Size } from './interfaces/sharp-options.interface';
 import {
-  getSharpOptions,
   getSharpOptionProps,
-  transformImage,
+  getSharpOptions,
   isOriginalSuffix,
+  transformImage,
 } from './multer-sharp.utils';
 import { randomStringGenerator } from '@nestjs/common/utils/random-string-generator.util';
 
@@ -93,7 +93,9 @@ export class MulterSharp implements StorageEngine, S3Storage {
           } else {
             const paramDir = [];
             storageOpts.dynamicPath.forEach((pathSegment) => {
-              paramDir.push(routeParams.includes(pathSegment) ? req.params[pathSegment] : pathSegment);
+              paramDir.push(
+                routeParams.includes(pathSegment) ? req.params[pathSegment] : pathSegment,
+              );
             });
             params.Key = `${Key}/${paramDir.join('/')}/${originalname}`;
           }
@@ -102,7 +104,6 @@ export class MulterSharp implements StorageEngine, S3Storage {
             ? `${Key}/${storageOpts.dynamicPath}/${originalname}`
             : `${Key}/${originalname}`;
         }
-
         mimetype.includes('image')
           ? this.uploadImageFileToS3(params, file, callback)
           : this.uploadFileToS3(params, file, callback);
@@ -175,7 +176,7 @@ export class MulterSharp implements StorageEngine, S3Storage {
               }
             });
 
-            const upload$ = from(
+            return from(
               upload.promise().then((result) => {
                 // tslint:disable-next-line
                 const { Body, ...rest } = size;
@@ -186,7 +187,6 @@ export class MulterSharp implements StorageEngine, S3Storage {
                 };
               }),
             );
-            return upload$;
           }),
           toArray(),
           first(),
@@ -235,12 +235,12 @@ export class MulterSharp implements StorageEngine, S3Storage {
             const data = upload
               .promise()
               .then((uploadedData) => ({ ...uploadedData, ...metadata.info }));
-            const upload$ = from(data);
-            return upload$;
+            return from(data);
           }),
         )
         .subscribe((response) => {
           const { size, format, channels, ...details } = response;
+
           const data = {
             ACL,
             ContentDisposition,

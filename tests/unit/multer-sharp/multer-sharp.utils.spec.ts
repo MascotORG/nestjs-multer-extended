@@ -106,11 +106,12 @@ describe('Shared Multer Sharp Utils', () => {
     });
 
     it('should return SharpOptions', () => {
-      expect(getSharpOptions(options)).toContainAllEntries([
-        ['resizeMultiple', undefined],
-        ['resize', { width: 500, height: 450 }],
-        ['ignoreAspectRatio', true],
-      ]);
+      expect(getSharpOptions(options)).toEqual({
+        resize: { width: 500, height: 450 },
+        ignoreAspectRatio: true,
+        format: undefined,
+        resizeMultiple: undefined,
+      });
     });
   });
 });

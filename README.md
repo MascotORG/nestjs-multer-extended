@@ -6,33 +6,6 @@
 </div>
 </h1>
 
-<div align="center">
-  <a href="https://www.npmjs.com/package/nestjs-multer-extended">
-    <img src="https://img.shields.io/npm/v/nestjs-multer-extended.svg" alt="NPM Version" />
-  </a>
-  <a href="https://github.com/jeffminsungkim/nestjs-multer-extended/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/jeffminsungkim/nestjs-multer-extended.svg" alt="license" />
-  </a>
-  <a href="https://circleci.com/gh/jeffminsungkim/nestjs-multer-extended" target="_blank">
-    <img src="https://img.shields.io/circleci/build/github/jeffminsungkim/nestjs-multer-extended/master" alt="CircleCI" />
-  </a>
-  <a href='https://coveralls.io/github/jeffminsungkim/nestjs-multer-extended?branch=master'>
-    <img src='https://coveralls.io/repos/github/jeffminsungkim/nestjs-multer-extended/badge.svg?branch=master&service=github' alt='Coverage Status' />
-  </a>
-  <a href="https://nestjs.com" target="_blank">
-    <img src="https://img.shields.io/badge/built%20with-NestJs-e0234e.svg" alt="Built with NestJS" />
-  </a>
-  <a href="https://github.com/nestjsplus/dyn-schematics" target="_blank">
-    <img src="https://img.shields.io/badge/Built%20with-%40nestjsplus%2Fdyn--schematics-brightgreen" alt="Built with @nestjsplus/dyn-schematics" />
-  </a>
-  <a href="http://commitizen.github.io/cz-cli/" target="_blank">
-    <img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen"/>
-  </a>
-  <a href="https://github.com/juliandavidmr/awesome-nestjs#components--libraries">
-    <img src="https://awesome.re/mentioned-badge.svg" alt="Awesome Nest" />
-  </a>
-  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
-</div>
 
 ## Features
 
@@ -46,12 +19,12 @@
 
 **NPM**
 ```bash
-$ npm i -s nestjs-multer-extended
+$ npm i -s @mascotapp/nestjs-multer-extended
 ```
 
 **Yarn**
 ```bash
-$ yarn add nestjs-multer-extended
+$ yarn add @mascotapp/nestjs-multer-extended
 ```
 
 ## Getting started
@@ -64,7 +37,7 @@ Once the installation process is complete, we can import the module either synch
 
 ```typescript
 import { Module } from '@nestjs/common';
-import { MulterExtendedModule } from 'nestjs-multer-extended';
+import { MulterExtendedModule } from '@mascotapp/nestjs-multer-extended';
 
 @Module({
   imports: [
@@ -92,7 +65,7 @@ In this example, the module integrates with the awesome [nestjs-config](https://
 
 ```typescript
 import { Module } from '@nestjs/common';
-import { MulterExtendedModule } from 'nestjs-multer-extended';
+import { MulterExtendedModule } from '@mascotapp/nestjs-multer-extended';
 import { ConfigService } from 'nestjs-config';
 
 @Module({
@@ -114,7 +87,7 @@ To upload a single file, simply tie the `AmazonS3FileInterceptor()` interceptor 
 
 ```javascript
 import { Controller, Post, UseInterceptors, UploadedFile } from '@nestjs/common';
-import { AmazonS3FileInterceptor } from 'nestjs-multer-extended';
+import { AmazonS3FileInterceptor } from '@mascotapp/nestjs-multer-extended';
 
 @Controller()
 export class AppController {
